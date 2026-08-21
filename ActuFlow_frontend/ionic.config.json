@@ -1,0 +1,7 @@
+{
+  "name": "ActuFlow_frontend",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
