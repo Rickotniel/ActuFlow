@@ -99,6 +99,15 @@ class IsArticleAuthorOrAdmin(BasePermission):
     Lecture : publique pour articles publiés, auteur/admin/modérateur pour le reste
     Écriture : auteur ou admin/modérateur
     """
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return True
+        if not (request.user and request.user.is_authenticated):
+            return False
+        return request.user.is_staff or request.user.roles.filter(
+            nom__in=['Redacteur', 'Administrateur', 'Moderateur']
+        ).exists()
+
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             if getattr(obj, 'statut', None) == 'Publie':

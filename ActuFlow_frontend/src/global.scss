@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -35,3 +39,40 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+:root {
+  --af-bg: #0d1117;
+  --af-surface: rgba(22, 27, 34, .72);
+  --af-surface-solid: #161b22;
+  --af-border: rgba(255, 255, 255, .12);
+  --af-text: #f5f7fb;
+  --af-muted: #9ca8b8;
+  --af-primary: #818cf8;
+  --af-secondary: #22d3ee;
+  --af-danger: #fb7185;
+}
+
+body {
+  background: var(--af-bg);
+  color: var(--af-text);
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+}
+
+ion-button { --border-radius: 12px; text-transform: none; }
+ion-icon { font-size: 1.15rem; }
+
+// Animations globales
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-content {
+  animation: fadeInUp 0.4s ease both;
+}

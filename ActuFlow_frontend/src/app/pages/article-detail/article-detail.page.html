@@ -1,0 +1,21 @@
+<ion-header class="detail-header">
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title><ion-icon name="book-outline"></ion-icon> Lecture</ion-title>
+    <ion-button slot="end" fill="clear" routerLink="/home"><ion-icon name="home-outline" slot="start"></ion-icon>Fil</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="detail-shell">
+    <div class="loading-state" *ngIf="isLoading"><ion-spinner name="crescent"></ion-spinner></div>
+    <div class="error-state" *ngIf="!isLoading && errorMessage">{{ errorMessage }} <a routerLink="/home">Retour aux articles</a></div>
+    <article *ngIf="article && !isLoading">
+      <div class="cover" [style.backgroundImage]="article.image_une ? 'url(' + article.image_une + ')' : 'none'"><span *ngIf="!article.image_une">ActuFlow</span></div>
+      <header class="article-heading"><p class="eyebrow">Article</p><h1>{{ article.titre }}</h1><p class="article-meta">Publié le {{ article.date_publication || article.date_creation | date:'dd MMMM yyyy' }} · {{ article.nombre_vues }} vues</p></header>
+      <div class="article-content">{{ article.contenu }}</div>
+      <div class="like-bar"><ion-button fill="outline" (click)="toggleLike()"><ion-icon [name]="currentLikeId ? 'heart' : 'heart-outline'" slot="start"></ion-icon>{{ currentLikeId ? 'Je n’aime plus' : 'J’aime' }}</ion-button><span><ion-icon name="happy-outline"></ion-icon> {{ likesCount }} réaction{{ likesCount > 1 ? 's' : '' }}</span></div>
+      <section class="comments" aria-labelledby="comments-title"><h2 id="comments-title">Commentaires <span>{{ comments.length }}</span></h2><div class="comment-form" *ngIf="isAuthenticated"><ion-textarea [(ngModel)]="commentText" autoGrow="true" maxlength="1000" placeholder="Partagez votre point de vue..."></ion-textarea><ion-button (click)="addComment()" [disabled]="!commentText.trim()">Publier</ion-button></div><p class="login-hint" *ngIf="!isAuthenticated"><a routerLink="/login">Connectez-vous</a> pour participer à la conversation.</p><div class="comment-list"><article class="comment" *ngFor="let comment of comments"><p>{{ comment.contenu }}</p><time>{{ comment.date_creation | date:'dd/MM/yyyy à HH:mm' }}</time></article><p class="empty-state" *ngIf="!comments.length">Aucun commentaire pour le moment.</p></div></section>
+    </article>
+  </main>
+</ion-content>

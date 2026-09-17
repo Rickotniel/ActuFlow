@@ -1,0 +1,172 @@
+:host {
+  --ink: #17211f;
+  --muted: #65716d;
+  --paper: #f4f6f1;
+  --accent: #d8623c;
+}
+
+ion-content { --background: var(--paper); }
+
+.auth-header ion-toolbar {
+  --background: var(--paper);
+  --color: var(--ink);
+  --border-width: 0;
+  padding: 0 5vw;
+}
+.auth-header ion-title { font-weight: 800; }
+.auth-header ion-button { --color: var(--ink); text-transform: none; font-weight: 700; }
+
+.auth-shell {
+  width: min(920px, calc(100% - 2rem));
+  min-height: calc(100% - 1rem);
+  margin: auto;
+  padding: clamp(2rem, 6vw, 5rem) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  gap: clamp(2rem, 7vw, 6rem);
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 1rem 0;
+  color: var(--ink);
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: .98;
+}
+.auth-intro > p:last-child {
+  max-width: 400px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.auth-panel {
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8e6;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.name-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-field {
+  --background: transparent;
+  --border-color: #d0d8d3;
+  --border-width: 0 0 1.5px 0;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+.form-field.ion-invalid { --border-color: #c94035; }
+.form-field ion-label {
+  margin-bottom: .45rem;
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 700;
+}
+.form-field ion-input {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+.form-field ion-input:focus-within {
+  --border-color: var(--accent);
+}
+
+.terms-field {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin: .5rem 0 .25rem;
+}
+.terms-field ion-label {
+  color: var(--muted);
+  font-size: .82rem;
+  white-space: normal;
+}
+.terms-field a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+.terms-error {
+  display: block;
+  margin: 0 0 1rem;
+  color: #c94035;
+  font-size: .8rem;
+}
+
+.submit-button {
+  --background: var(--accent);
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(216, 98, 60, 0.3);
+  margin: 1rem 0 0;
+  text-transform: none;
+  font-weight: 800;
+  height: 48px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.submit-button:hover {
+  transform: translateY(-1px);
+  --box-shadow: 0 6px 20px rgba(216, 98, 60, 0.4);
+}
+
+.switch-prompt {
+  margin: 1.5rem 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: .9rem;
+}
+.switch-prompt a {
+  color: var(--accent);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.alert-success {
+  --background: #d4edda;
+  --color: #155724;
+}
+
+@media (max-width: 700px) {
+  .auth-header ion-toolbar { padding: 0 .5rem; }
+  .auth-shell {
+    display: block;
+    width: min(100% - 2rem, 480px);
+    padding-top: 2.5rem;
+  }
+  .auth-intro { margin-bottom: 2rem; }
+  .auth-panel {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .name-fields {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+ion-content { --background: #0d1117; }
+.auth-layout { position: relative; overflow: hidden; background: radial-gradient(at 20% 10%, rgba(99, 102, 241, .28), transparent 38%), radial-gradient(at 90% 90%, rgba(6, 182, 212, .2), transparent 34%), #0d1117; }
+.auth-form-column { position: relative; z-index: 1; background: rgba(13, 17, 23, .62); border-left: 1px solid rgba(255, 255, 255, .1); backdrop-filter: blur(24px); animation: authReveal .55s ease both; }
+.auth-form-column input { background: rgba(22, 27, 34, .72); border-color: rgba(255, 255, 255, .14); }
+.auth-form-column input:focus { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, .2); }
+.auth-form-column button[type='submit'] { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.auth-form-column button[type='submit']:hover { background: linear-gradient(135deg, #818cf8, #a78bfa); }
+@keyframes authReveal { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
+@media (max-width: 1023px) { .auth-form-column { border-left: 0; } }

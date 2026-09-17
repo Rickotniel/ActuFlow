@@ -8,10 +8,24 @@ class RoleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UtilisateurSerializer(serializers.ModelSerializer):
+    role_names = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='nom',
+        source='roles'
+    )
+
     class Meta:
         model = Utilisateur
-        fields = ['id_utilisateur', 'email', 'prenom', 'nom', 'biographie', 'photo_profil', 'est_actif', 'date_creation', 'date_modification', 'roles']
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = [
+            'id_utilisateur', 'email', 'password', 'prenom', 'nom',
+            'biographie', 'photo_profil', 'est_actif', 'is_staff',
+            'date_creation', 'date_modification', 'roles', 'role_names'
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True, 'required': True},
+            'roles': {'required': False}
+        }
 
     def create(self, validated_data):
         roles = validated_data.pop('roles', [])
@@ -20,8 +34,43 @@ class UtilisateurSerializer(serializers.ModelSerializer):
         if password:
             user.set_password(password)
             user.save()
-        user.roles.set(roles)
+        if roles:
+            user.roles.set(roles)
+        else:
+            lecteur_role = Role.objects.filter(nom='Lecteur').first()
+            if lecteur_role:
+                user.roles.add(lecteur_role)
         return user
+
+class ProfilSerializer(serializers.ModelSerializer):
+    """Champs modifiables par l'utilisateur sur son propre profil."""
+    role_names = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field='nom', source='roles'
+    )
+
+    class Meta:
+        model = Utilisateur
+        fields = [
+            'id_utilisateur', 'email', 'prenom', 'nom', 'biographie',
+            'photo_profil', 'est_actif', 'is_staff', 'date_creation',
+            'date_modification', 'role_names'
+        ]
+        read_only_fields = [
+            'id_utilisateur', 'email', 'est_actif', 'is_staff',
+            'date_creation', 'date_modification', 'role_names'
+        ]
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        roles = validated_data.pop('roles', None)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        if password:
+            instance.set_password(password)
+        if roles is not None:
+            instance.roles.set(roles)
+        instance.save()
+        return instance
 
 class CategorieSerializer(serializers.ModelSerializer):
     class Meta:

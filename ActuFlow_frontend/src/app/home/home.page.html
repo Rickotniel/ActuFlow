@@ -1,20 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header class="home-header">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title><ion-icon name="newspaper-outline" aria-hidden="true"></ion-icon> ActuFlow</ion-title>
+    <ng-container *ngIf="currentUser; else guestActions">
+      <ion-button *ngIf="canWrite" slot="end" fill="clear" routerLink="/my-articles"><ion-icon name="create-outline" slot="start"></ion-icon>Écrire</ion-button>
+      <ion-button slot="end" fill="clear" routerLink="/profile"><ion-icon name="person-circle-outline" slot="start"></ion-icon>Mon profil</ion-button>
+      <ion-button slot="end" fill="clear" (click)="logout()"><ion-icon name="log-out-outline" slot="start"></ion-icon>Déconnexion</ion-button>
+    </ng-container>
+    <ng-template #guestActions><ion-button slot="end" fill="clear" routerLink="/login">Se connecter</ion-button></ng-template>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  <main class="reader-shell">
+    <section class="reader-intro">
+      <div><p class="eyebrow">Le fil ActuFlow</p><h1>Les histoires qui méritent votre attention.</h1></div>
+      <p>Explorez les dernières publications de notre communauté.</p>
+    </section>
+    <div class="search-row"><ion-searchbar [(ngModel)]="search" (ionInput)="searchArticles()" placeholder="Rechercher un article" animated="true"></ion-searchbar></div>
+    <div class="category-row" role="list">
+      <ion-chip [outline]="selectedCategory !== ''" (click)="selectCategory('')">Tout</ion-chip>
+      <ion-chip *ngFor="let category of categories" [outline]="selectedCategory !== category.id_categorie" (click)="selectCategory(category.id_categorie)">{{ category.nom }}</ion-chip>
+    </div>
+    <p class="categories-error" *ngIf="categoriesError">{{ categoriesError }}</p>
+    <div class="loading-state" *ngIf="isLoading"><ion-spinner name="crescent"></ion-spinner><span>Chargement des articles...</span></div>
+    <div class="error-state" *ngIf="!isLoading && errorMessage">{{ errorMessage }}</div>
+    <section class="article-grid" *ngIf="!isLoading && !errorMessage">
+      <article class="article-card" *ngFor="let article of articles">
+        <div class="article-image" [style.backgroundImage]="article.image_une ? 'url(' + article.image_une + ')' : 'none'"><span *ngIf="!article.image_une">ActuFlow</span></div>
+        <div class="article-body"><p class="article-meta"><ion-icon name="calendar-outline"></ion-icon> {{ article.date_publication || article.date_creation | date:'dd MMM yyyy' }} · <ion-icon name="eye-outline"></ion-icon> {{ article.nombre_vues }} vues</p><h2>{{ article.titre }}</h2><p class="article-summary">{{ article.resume || article.contenu | slice:0:150 }}...</p><ion-button fill="clear" [routerLink]="['/article', article.id_article]">Lire l'article <ion-icon name="arrow-forward-outline" slot="end"></ion-icon></ion-button></div>
+      </article>
+      <p class="empty-state" *ngIf="!articles.length">Aucun article ne correspond à votre recherche.</p>
+    </section>
+    <nav class="pagination" *ngIf="!isLoading && totalPages > 1" aria-label="Pagination"><ion-button fill="outline" (click)="previousPage()" [disabled]="page === 1">Précédent</ion-button><span>Page {{ page }} sur {{ totalPages }}</span><ion-button fill="outline" (click)="nextPage()" [disabled]="page === totalPages">Suivant</ion-button></nav>
+  </main>
 </ion-content>

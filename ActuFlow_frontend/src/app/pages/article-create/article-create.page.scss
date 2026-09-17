@@ -1,0 +1,31 @@
+:host { --ink: #17211f; --muted: #65716d; --paper: #f4f6f1; --accent: #d8623c; }
+ion-content { --background: var(--paper); }
+.editor-header ion-toolbar { --background: var(--paper); --color: var(--ink); --border-width: 0; padding: 0 5vw; }
+.editor-header ion-title { font-weight: 800; }
+.editor-header ion-button { --color: var(--accent); text-transform: none; font-weight: 800; }
+.editor-shell { width: min(950px, calc(100% - 2rem)); margin: auto; padding: clamp(2rem, 6vw, 5rem) 0; }
+.editor-heading { max-width: 650px; margin-bottom: 2rem; }
+.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h1 { margin: .75rem 0; color: var(--ink); font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; }
+.editor-heading p:last-child { color: var(--muted); line-height: 1.5; }
+.editor-panel { padding: clamp(1rem, 4vw, 2.5rem); background: #fff; border: 1px solid #dce3dc; box-shadow: 10px 10px 0 #dce3dc; }
+.title-input { --padding-start: 0; --padding-end: 0; --color: var(--ink); font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; }
+.summary-input, .content-input { --background: transparent; --padding-start: 0; --padding-end: 0; --color: var(--ink); margin-top: 1rem; border-bottom: 1px solid #dce3dc; }
+.summary-input { font-size: 1.1rem; }
+.content-input { min-height: 360px; font-size: 1.05rem; line-height: 1.7; }
+.editor-settings { display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+.file-picker { flex: 1; padding: .8rem; border: 1px dashed #bdc8c0; color: var(--accent); font-weight: 700; cursor: pointer; }
+.file-picker input { display: block; width: 0; height: 0; opacity: 0; }
+.editor-settings ion-select { flex: 1; border: 1px solid #bdc8c0; }
+.editor-actions { display: flex; justify-content: end; gap: .75rem; margin-top: 2rem; }
+.editor-actions ion-button { --border-radius: 4px; margin: 0; text-transform: none; font-weight: 800; }
+.submit-button { --background: var(--accent); }
+@media (max-width: 600px) { .editor-header ion-toolbar { padding: 0 .5rem; } .editor-shell { width: min(100% - 2rem, 480px); } .editor-panel { box-shadow: 6px 6px 0 #dce3dc; } .editor-settings, .editor-actions { display: grid; } .editor-settings ion-select, .file-picker, .editor-actions ion-button { width: 100%; } }
+
+:host { --ink: var(--af-text); --muted: var(--af-muted); --paper: var(--af-bg); --accent: var(--af-primary); }
+ion-content { --background: radial-gradient(circle at 20% 0%, rgba(34, 211, 238, .1), transparent 30%), var(--af-bg); }
+.editor-header ion-toolbar { --background: rgba(13, 17, 23, .72); --color: var(--af-text); border-bottom: 1px solid var(--af-border); backdrop-filter: blur(18px); }
+.editor-panel { background: var(--af-surface); border-color: var(--af-border); box-shadow: 0 20px 50px rgba(0, 0, 0, .25); backdrop-filter: blur(18px); }
+.title-input, .summary-input, .content-input { --color: var(--af-text); --placeholder-color: var(--af-muted); border-color: var(--af-border); }
+.editor-heading p:last-child { color: var(--af-muted); }
+.editor-settings ion-select, .file-picker { border-color: var(--af-border); color: var(--af-muted); }

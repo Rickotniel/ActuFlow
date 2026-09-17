@@ -1,0 +1,16 @@
+/* 
+ * Styles are handled via Tailwind CSS in the HTML template. 
+ */
+:host {
+  display: block;
+}
+
+ion-content { --background: #0d1117; }
+.auth-layout { position: relative; overflow: hidden; background: radial-gradient(at 20% 10%, rgba(99, 102, 241, .28), transparent 38%), radial-gradient(at 90% 90%, rgba(6, 182, 212, .2), transparent 34%), #0d1117; }
+.auth-form-column { position: relative; z-index: 1; background: rgba(13, 17, 23, .62); border-left: 1px solid rgba(255, 255, 255, .1); backdrop-filter: blur(24px); animation: authReveal .55s ease both; }
+.auth-form-column input { background: rgba(22, 27, 34, .72); border-color: rgba(255, 255, 255, .14); }
+.auth-form-column input:focus { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, .2); }
+.auth-form-column button[type='submit'] { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.auth-form-column button[type='submit']:hover { background: linear-gradient(135deg, #818cf8, #a78bfa); }
+@keyframes authReveal { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
+@media (max-width: 1023px) { .auth-form-column { border-left: 0; } }

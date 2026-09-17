@@ -1,0 +1,37 @@
+:host { --ink: #17211f; --muted: #65716d; --paper: #f4f6f1; --accent: #d8623c; }
+ion-content { --background: var(--paper); }
+.journalist-header ion-toolbar { --background: var(--paper); --color: var(--ink); --border-width: 0; padding: 0 5vw; }
+.journalist-header ion-title { font-weight: 800; }
+.journalist-header ion-button { --color: var(--accent); text-transform: none; font-weight: 800; }
+.dashboard-shell { width: min(1000px, calc(100% - 2rem)); margin: auto; padding: clamp(2rem, 6vw, 5rem) 0; }
+.dashboard-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h1 { margin: .75rem 0; color: var(--ink); font-size: clamp(2.4rem, 6vw, 5rem); line-height: 1; }
+.dashboard-heading p:last-child { color: var(--muted); line-height: 1.5; }
+.create-button { --background: var(--accent); --border-radius: 4px; flex: 0 0 auto; text-transform: none; font-weight: 800; }
+.tabs { display: flex; gap: 1.5rem; margin: 3rem 0 1rem; border-bottom: 1px solid #cdd5cf; }
+.tabs button { padding: .9rem 0; border: 0; background: none; color: var(--muted); font: inherit; cursor: pointer; }
+.tabs button.active { color: var(--ink); border-bottom: 3px solid var(--accent); font-weight: 800; }
+.tabs span { margin-left: .35rem; color: var(--accent); }
+.article-list { display: grid; gap: .75rem; }
+.managed-article { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: #fff; border: 1px solid #dce3dc; }
+.status-dot { width: 10px; height: 10px; flex: 0 0 auto; border-radius: 50%; background: #e2a33d; }
+.status-dot.published { background: #3c9b72; }
+.managed-copy { min-width: 0; flex: 1; }
+.article-meta { color: var(--accent); font-size: .75rem; font-weight: 700; }
+.managed-copy h2 { overflow: hidden; margin: .45rem 0; color: var(--ink); font-size: 1.2rem; text-overflow: ellipsis; white-space: nowrap; }
+.managed-copy p:last-child { overflow: hidden; color: var(--muted); text-overflow: ellipsis; white-space: nowrap; }
+.managed-actions { display: flex; flex: 0 0 auto; }
+.managed-actions ion-button { margin: 0; text-transform: none; font-weight: 700; }
+.loading-state, .empty-state, .error-state { padding: 3rem 1rem; color: var(--muted); text-align: center; }
+@media (max-width: 650px) { .dashboard-heading { display: block; } .create-button { width: 100%; margin-top: 1.5rem; } .managed-article { align-items: start; } .managed-actions { display: block; } .managed-actions ion-button { display: block; font-size: .8rem; } }
+
+:host { --ink: var(--af-text); --muted: var(--af-muted); --paper: var(--af-bg); --accent: var(--af-primary); }
+ion-content { --background: radial-gradient(circle at 80% 0%, rgba(129, 140, 248, .14), transparent 32%), var(--af-bg); }
+.journalist-header ion-toolbar { --background: rgba(13, 17, 23, .72); --color: var(--af-text); border-bottom: 1px solid var(--af-border); backdrop-filter: blur(18px); }
+.managed-article { background: var(--af-surface); border-color: var(--af-border); box-shadow: 0 10px 28px rgba(0, 0, 0, .16); backdrop-filter: blur(16px); }
+.managed-copy h2 { color: var(--af-text); }
+.managed-copy p:last-child, .dashboard-heading p:last-child { color: var(--af-muted); }
+.tabs { border-color: var(--af-border); }
+.tabs button { color: var(--af-muted); }
+.tabs button.active { color: var(--af-text); }

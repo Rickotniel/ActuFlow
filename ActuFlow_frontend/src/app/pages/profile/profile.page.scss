@@ -1,0 +1,163 @@
+:host {
+  --ink: #17211f;
+  --muted: #65716d;
+  --paper: #f4f6f1;
+  --accent: #d8623c;
+}
+
+ion-content { --background: var(--paper); }
+
+.profile-header ion-toolbar {
+  --background: var(--paper);
+  --color: var(--ink);
+  --border-width: 0;
+  padding: 0 5vw;
+}
+.profile-header ion-title { font-weight: 800; }
+.profile-header ion-button {
+  --color: var(--accent);
+  text-transform: none;
+  font-weight: 800;
+}
+
+.profile-shell {
+  width: min(900px, calc(100% - 2rem));
+  margin: auto;
+  padding: clamp(2rem, 7vw, 5rem) 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 440px);
+  gap: clamp(2rem, 8vw, 6rem);
+  align-items: start;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 1rem 0;
+  color: var(--ink);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+}
+.profile-intro > p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.role-list {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.role-list ion-chip {
+  --background: #e8eeea;
+  --color: var(--ink);
+  font-weight: 600;
+}
+
+.profile-panel {
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8e6;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--accent) center / cover;
+  color: #fff8ed;
+  font-size: 2rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.avatar:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.photo-picker {
+  display: block;
+  margin: 0 auto 1.5rem;
+  color: var(--accent);
+  text-align: center;
+  font-size: .85rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.photo-picker input {
+  display: block;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.profile-loading,
+.profile-error {
+  padding: 3rem 1rem;
+  color: var(--af-muted);
+  text-align: center;
+}
+
+.profile-error a {
+  color: var(--af-primary);
+  font-weight: 700;
+}
+
+.profile-panel ion-item {
+  --background: transparent;
+  --border-color: #d0d8d3;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 1.25rem;
+}
+.profile-panel ion-item ion-label {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.save-button {
+  --background: var(--accent);
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(216, 98, 60, 0.3);
+  margin-top: 1rem;
+  text-transform: none;
+  font-weight: 800;
+  height: 48px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.save-button:hover {
+  transform: translateY(-1px);
+  --box-shadow: 0 6px 20px rgba(216, 98, 60, 0.4);
+}
+
+@media (max-width: 700px) {
+  .profile-shell {
+    display: block;
+    width: min(100% - 2rem, 480px);
+  }
+  .profile-intro { margin-bottom: 2rem; }
+  .profile-panel {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+  }
+}
+
+:host { --ink: var(--af-text); --muted: var(--af-muted); --paper: var(--af-bg); --accent: var(--af-primary); }
+ion-content { --background: radial-gradient(circle at 80% 0%, rgba(129, 140, 248, .14), transparent 32%), var(--af-bg); }
+.profile-header ion-toolbar { --background: rgba(13, 17, 23, .72); --color: var(--af-text); border-bottom: 1px solid var(--af-border); backdrop-filter: blur(18px); }
+.profile-panel { background: var(--af-surface); border-color: var(--af-border); box-shadow: 0 20px 50px rgba(0, 0, 0, .25); backdrop-filter: blur(18px); }
+.profile-panel ion-item { --background: transparent; --color: var(--af-text); --border-color: var(--af-border); }
+.profile-panel ion-label, .profile-intro > p { color: var(--af-muted); }
+.role-list ion-chip { --background: rgba(129, 140, 248, .16); --color: #c7d2fe; border: 1px solid rgba(129, 140, 248, .28); }
+.photo-picker, .save-button { --background: var(--af-primary); color: #eef2ff; }
